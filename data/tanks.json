@@ -1,0 +1,38 @@
+{
+  "tanks": [
+    {
+    "MS-1": {
+        "tier": 1,
+        "type": "light",
+        "weakspots": ["Frontal bajo", "Anillo de la torreta"],
+        "notes": "Muy débil en general"
+    },
+    "T-26": {
+        "tier": 2,
+        "type": "light",
+        "weakspots": ["Laterales", "Placa frontal inferior"],
+        "notes": "Buena movilidad, blindaje débil"
+    },
+    "Pz. II": {
+        "tier": 2,
+        "type": "light",
+        "weakspots": ["Frontal bajo", "Laterales"],
+        "notes": "Buena cadencia, blindaje mediocre"
+    },
+    "BT-2": {
+        "tier": 2,
+        "type": "light",
+        "weakspots": ["Cúpula del comandante", "Placa baja"],
+        "notes": "Muy rápido pero frágil"
+    },
+    "Cruiser II": {
+        "tier": 3,
+        "type": "medium",
+        "weakspots": ["Lados", "Parte trasera"],
+        "notes": "Cañón potente pero lento"
+    }
+
+
+  }
+]
+}
