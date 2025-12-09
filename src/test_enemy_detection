@@ -15,5 +15,18 @@ while True:
     cv2.imshow("Enemy Detection", frame)
     if cv2.waitKey(1) == 27:
         break
+    
+from yolo_detector import YOLODetector
+
+detector = YOLODetector()
+
+def process_frame(frame):
+    detections = detector.detect_tanks(frame)
+
+    if len(detections) > 0:
+        best = max(detections, key=lambda x: x["confidence"])
+        return best["label"]
+
+    return None
 
 cv2.destroyAllWindows()
