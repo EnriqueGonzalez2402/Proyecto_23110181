@@ -1,38 +1,377 @@
 {
   "tanks": [
-    {
-    "MS-1": {
-        "tier": 1,
-        "type": "light",
-        "weakspots": ["Frontal bajo", "Anillo de la torreta"],
-        "notes": "Muy débil en general"
-    },
-    "T-26": {
-        "tier": 2,
-        "type": "light",
-        "weakspots": ["Laterales", "Placa frontal inferior"],
-        "notes": "Buena movilidad, blindaje débil"
-    },
-    "Pz. II": {
-        "tier": 2,
-        "type": "light",
-        "weakspots": ["Frontal bajo", "Laterales"],
-        "notes": "Buena cadencia, blindaje mediocre"
-    },
-    "BT-2": {
-        "tier": 2,
-        "type": "light",
-        "weakspots": ["Cúpula del comandante", "Placa baja"],
-        "notes": "Muy rápido pero frágil"
-    },
-    "Cruiser II": {
-        "tier": 3,
-        "type": "medium",
-        "weakspots": ["Lados", "Parte trasera"],
-        "notes": "Cañón potente pero lento"
-    }
+  {
+    "name": "MS-1",
+    "tier": 1,
+    "nation": "USSR",
+    "class": "light",
+    "weakspots": ["torreta", "laterales", "parte trasera"],
+    "armor": { "hull_front": 5, "hull_side": 3, "hull_rear": 3, "turret_front": 8, "turret_side": 6, "turret_rear": 6 },
+    "notes": "Blindaje casi inexistente, apuntar a la torreta."
+  },
+  {
+    "name": "T1 Cunningham",
+    "tier": 1,
+    "nation": "USA",
+    "class": "light",
+    "weakspots": ["todo el casco", "torreta"],
+    "armor": { "hull_front": 5, "hull_side": 5, "hull_rear": 5, "turret_front": 5, "turret_side": 5, "turret_rear": 5 },
+    "notes": "Muy fácil de penetrar por cualquier lado."
+  },
+  {
+    "name": "Leichttraktor",
+    "tier": 1,
+    "nation": "Germany",
+    "class": "light",
+    "weakspots": ["torreta", "frontal inferior"],
+    "armor": { "hull_front": 14, "hull_side": 14, "hull_rear": 14, "turret_front": 14, "turret_side": 14, "turret_rear": 14 },
+    "notes": "El frontal es un poco más fuerte, apuntar a la torreta."
+  },
+  {
+    "name": "Renault FT",
+    "tier": 1,
+    "nation": "France",
+    "class": "light",
+    "weakspots": ["frontal inferior", "torreta"],
+    "armor": { "hull_front": 16, "hull_side": 14, "hull_rear": 14, "turret_front": 22, "turret_side": 22, "turret_rear": 22 },
+    "notes": "La torreta es débil si se usa munición AP."
+  },
+  {
+    "name": "Kolohousenka",
+    "tier": 1,
+    "nation": "Czechoslovakia",
+    "class": "light",
+    "weakspots": ["torreta", "laterales"],
+    "armor": { "hull_front": 8, "hull_side": 6, "hull_rear": 6, "turret_front": 8, "turret_side": 8, "turret_rear": 8 },
+    "notes": "Ultraligero, cualquier ángulo funciona."
+  },
+  {
+    "name": "Strv fm/21",
+    "tier": 1,
+    "nation": "Sweden",
+    "class": "light",
+    "weakspots": ["cupula", "torreta"],
+    "armor": { "hull_front": 8, "hull_side": 6, "hull_rear": 6, "turret_front": 10, "turret_side": 10, "turret_rear": 10 },
+    "notes": "La torreta es muy débil."
+  },
+  {
+    "name": "Vickers Medium Mk. I",
+    "tier": 1,
+    "nation": "UK",
+    "class": "medium",
+    "weakspots": ["torreta", "frontal inferior"],
+    "armor": { "hull_front": 8, "hull_side": 6, "hull_rear": 6, "turret_front": 14, "turret_side": 13, "turret_rear": 13 },
+    "notes": "Fracamente blindado por todos los lados."
+  },
+  {
+    "name": "Renault Otsu",
+    "tier": 1,
+    "nation": "Japan",
+    "class": "light",
+    "weakspots": ["casco frontal", "torreta"],
+    "armor": { "hull_front": 12, "hull_side": 10, "hull_rear": 10, "turret_front": 12, "turret_side": 10, "turret_rear": 10 },
+    "notes": "Tanque muy básico; apuntar a la torreta."
+  },
+  {
+    "name": "NC-31",
+    "tier": 1,
+    "nation": "China",
+    "class": "light",
+    "weakspots": ["torreta", "laterales"],
+    "armor": { "hull_front": 10, "hull_side": 8, "hull_rear": 8, "turret_front": 12, "turret_side": 12, "turret_rear": 12 },
+    "notes": "Similar al Renault FT."
+  },
+  {
+    "name": "4TP",
+    "tier": 1,
+    "nation": "Poland",
+    "class": "light",
+    "weakspots": ["frontal inferior", "torreta"],
+    "armor": { "hull_front": 13, "hull_side": 10, "hull_rear": 8, "turret_front": 12, "turret_side": 10, "turret_rear": 10 },
+    "notes": "Torreta grande y fácil de penetrar."
+  },
 
 
+  
+
+
+
+
+  {
+    "name": "BT-2",
+    "tier": 2,
+    "nation": "USSR",
+    "class": "light",
+    "weakspots": ["frontal inferior", "torreta"],
+    "armor": { "hull_front": 13, "hull_side": 13, "hull_rear": 10, "turret_front": 15, "turret_side": 15, "turret_rear": 15 },
+    "notes": "Muy rápido pero poco blindaje."
+  },
+  
+  {
+    "name": "T-26",
+    "tier": 2,
+    "nation": "USSR",
+    "class": "light",
+    "weakspots": ["torreta", "frontal débil"],
+    "armor": { "hull_front": 15, "hull_side": 15, "hull_rear": 15, "turret_front": 15, "turret_side": 15, "turret_rear": 15 },
+    "notes": "Muy penetrable desde cualquier ángulo."
+  },
+  {
+    "name": "Tetrarch",
+    "tier": 2,
+    "nation": "UK",
+    "class": "light",
+    "weakspots": ["todo frontal", "torreta"],
+    "armor": { "hull_front": 16, "hull_side": 14, "hull_rear": 10, "turret_front": 16, "turret_side": 14, "turret_rear": 10 },
+    "notes": "Rápido pero muy frágil."
+  },
+  {
+    "name": "Pz.Kpfw. I",
+    "tier": 2,
+    "nation": "Germany",
+    "class": "light",
+    "weakspots": ["frontal inferior", "torreta"],
+    "armor": { "hull_front": 13, "hull_side": 13, "hull_rear": 13, "turret_front": 13, "turret_side": 13, "turret_rear": 13 },
+    "notes": "Daño bajo pero buena cadencia."
+  },
+  {
+    "name": "Pz.Kpfw. II",
+    "tier": 2,
+    "nation": "Germany",
+    "class": "light",
+    "weakspots": ["cupula", "torreta", "laterales"],
+    "armor": { "hull_front": 30, "hull_side": 20, "hull_rear": 20, "turret_front": 30, "turret_side": 20, "turret_rear": 20 },
+    "notes": "Frontal fuerte para su tier."
+  },
+  {
+    "name": "M2 Light",
+    "tier": 2,
+    "nation": "USA",
+    "class": "light",
+    "weakspots": ["torreta", "lower plate"],
+    "armor": { "hull_front": 25, "hull_side": 25, "hull_rear": 25, "turret_front": 25, "turret_side": 25, "turret_rear": 25 },
+    "notes": "La torreta tiene varias zonas débiles."
+  },
+  {
+    "name": "T18",
+    "tier": 2,
+    "nation": "USA",
+    "class": "td",
+    "weakspots": ["visor", "casco lateral"],
+    "armor": { "hull_front": 51, "hull_side": 25, "hull_rear": 19 },
+    "notes": "Frontal muy fuerte, disparar a los costados."
+  },
+  {
+    "name": "AMR 35",
+    "tier": 2,
+    "nation": "France",
+    "class": "light",
+    "weakspots": ["todo el casco", "torreta"],
+    "armor": { "hull_front": 13, "hull_side": 8, "hull_rear": 10, "turret_front": 20, "turret_side": 15, "turret_rear": 15 },
+    "notes": "Muy frágil."
+  },
+  {
+    "name": "R35",
+    "tier": 2,
+    "nation": "France",
+    "class": "light",
+    "weakspots": ["cupula", "torreta"],
+    "armor": { "hull_front": 40, "hull_side": 32, "hull_rear": 32, "turret_front": 40, "turret_side": 40, "turret_rear": 40 },
+    "notes": "Blindaje decente pero lenta."
+  },
+
+
+
+
+
+
+  {
+    "name": "BT-7",
+    "tier": 3,
+    "nation": "USSR",
+    "class": "light",
+    "weakspots": ["casco frontal", "torreta", "costados"],
+    "armor": { "hull_front": 15, "hull_side": 15, "hull_rear": 13, "turret_front": 15, "turret_side": 15, "turret_rear": 15 },
+    "notes": "Muy rápido pero débil, cualquier lado penetra."
+  },
+  {
+    "name": "T-46",
+    "tier": 3,
+    "nation": "USSR",
+    "class": "light",
+    "weakspots": ["torreta", "frontal inferior"],
+    "armor": { "hull_front": 15, "hull_side": 15, "hull_rear": 10, "turret_front": 15, "turret_side": 15, "turret_rear": 15 },
+    "notes": "La torreta es el punto débil principal."
+  },
+  {
+    "name": "M3 Stuart",
+    "tier": 3,
+    "nation": "USA",
+    "class": "light",
+    "weakspots": ["anillo de torreta", "costados"],
+    "armor": { "hull_front": 38, "hull_side": 25, "hull_rear": 25, "turret_front": 25, "turret_side": 25, "turret_rear": 25 },
+    "notes": "Moverse mucho lo hace difícil, pero débil en general."
+  },
+  {
+    "name": "T-70",
+    "tier": 3,
+    "nation": "USSR",
+    "class": "light",
+    "weakspots": ["frontal inferior", "torreta"],
+    "armor": { "hull_front": 35, "hull_side": 15, "hull_rear": 15, "turret_front": 45, "turret_side": 35, "turret_rear": 35 },
+    "notes": "Frontal superior puede rebotar, apuntar bajo."
+  },
+  {
+    "name": "Pz.Kpfw. I Ausf. C",
+    "tier": 3,
+    "nation": "Germany",
+    "class": "light",
+    "weakspots": ["casco frontal", "torreta"],
+    "armor": { "hull_front": 30, "hull_side": 20, "hull_rear": 20, "turret_front": 30, "turret_side": 20, "turret_rear": 20 },
+    "notes": "Blindaje flojo, movilidad excelente."
+  },
+  {
+    "name": "Pz.Kpfw. II",
+    "tier": 3,
+    "nation": "Germany",
+    "class": "light",
+    "weakspots": ["cupula", "torreta", "frontal inferior"],
+    "armor": { "hull_front": 30, "hull_side": 20, "hull_rear": 20, "turret_front": 30, "turret_side": 20, "turret_rear": 20 },
+    "notes": "Casco ligeramente angulado, torreta débil."
+  },
+  {
+    "name": "AMX 38",
+    "tier": 3,
+    "nation": "France",
+    "class": "light",
+    "weakspots": ["cupula", "frontal inferior"],
+    "armor": { "hull_front": 40, "hull_side": 30, "hull_rear": 30, "turret_front": 40, "turret_side": 30, "turret_rear": 30 },
+    "notes": "Uno de los más duros del tier; evitar frontal."
+  },
+  {
+    "name": "Type 98 Ke-Ni",
+    "tier": 3,
+    "nation": "Japan",
+    "class": "light",
+    "weakspots": ["torreta", "costados"],
+    "armor": { "hull_front": 16, "hull_side": 12, "hull_rear": 10, "turret_front": 20, "turret_side": 16, "turret_rear": 16 },
+    "notes": "Muy débil pero rápido."
+  },
+  {
+    "name": "Vickers Medium Mk. II",
+    "tier": 3,
+    "nation": "UK",
+    "class": "medium",
+    "weakspots": ["torreta", "casco frontal"],
+    "armor": { "hull_front": 14, "hull_side": 14, "hull_rear": 14, "turret_front": 30, "turret_side": 30, "turret_rear": 30 },
+    "notes": "Torreta muy blanda."
+  },
+
+   
+
+
+
+
+
+
+
+
+  {
+    "name": "T-28",
+    "tier": 4,
+    "nation": "USSR",
+    "class": "medium",
+    "weakspots": ["frontal inferior", "laterales", "torreta"],
+    "armor": { "hull_front": 30, "hull_side": 20, "hull_rear": 20, "turret_front": 20, "turret_side": 20, "turret_rear": 20 },
+    "notes": "Gran tamaño, fácil de penetrar."
+  },
+  {
+    "name": "T-50",
+    "tier": 4,
+    "nation": "USSR",
+    "class": "light",
+    "weakspots": ["frontal inferior", "anillo de torreta"],
+    "armor": { "hull_front": 45, "hull_side": 40, "hull_rear": 40, "turret_front": 37, "turret_side": 37, "turret_rear": 37 },
+    "notes": "Angulado puede rebotar, apuntar abajo."
+  },
+  {
+    "name": "M3 Lee",
+    "tier": 4,
+    "nation": "USA",
+    "class": "medium",
+    "weakspots": ["casco frontal", "lado derecho", "torreta lateral"],
+    "armor": { "hull_front": 51, "hull_side": 38, "hull_rear": 38, "turret_front": 38, "turret_side": 38, "turret_rear": 38 },
+    "notes": "Tanque alto con puntos débiles grandes."
+  },
+  {
+    "name": "M5 Stuart",
+    "tier": 4,
+    "nation": "USA",
+    "class": "light",
+    "weakspots": ["casco frontal", "torreta"],
+    "armor": { "hull_front": 28, "hull_side": 25, "hull_rear": 25, "turret_front": 26, "turret_side": 26, "turret_rear": 26 },
+    "notes": "Muy móvil pero papel."
+  },
+  {
+    "name": "Pz.Kpfw. III Ausf. J",
+    "tier": 4,
+    "nation": "Germany",
+    "class": "medium",
+    "weakspots": ["cupula", "frontal inferior"],
+    "armor": { "hull_front": 50, "hull_side": 30, "hull_rear": 30, "turret_front": 50, "turret_side": 30, "turret_rear": 30 },
+    "notes": "Frontal es decente, apuntar a cupula."
+  },
+  {
+    "name": "Pz.Kpfw. II Ausf. G",
+    "tier": 4,
+    "nation": "Germany",
+    "class": "light",
+    "weakspots": ["torreta", "laterales"],
+    "armor": { "hull_front": 30, "hull_side": 20, "hull_rear": 20, "turret_front": 30, "turret_side": 20, "turret_rear": 20 },
+    "notes": "Similar al Pz II estándar."
+  },
+  {
+    "name": "AMX 40",
+    "tier": 4,
+    "nation": "France",
+    "class": "light",
+    "weakspots": ["cupula", "frontal inferior", "laterales"],
+    "armor": { "hull_front": 60, "hull_side": 60, "hull_rear": 40, "turret_front": 60, "turret_side": 60, "turret_rear": 60 },
+    "notes": "Muy blindado para su tier, evitar frontal."
+  },
+  {
+    "name": "Type 5 Ke-Ho",
+    "tier": 4,
+    "nation": "Japan",
+    "class": "light",
+    "weakspots": ["frontal inferior", "torreta"],
+    "armor": { "hull_front": 20, "hull_side": 15, "hull_rear": 15, "turret_front": 25, "turret_side": 20, "turret_rear": 20 },
+    "notes": "Muy débil, cualquier lado penetra."
+  },
+  {
+    "name": "Covenanter",
+    "tier": 4,
+    "nation": "UK",
+    "class": "light",
+    "weakspots": ["torreta", "frontal inferior"],
+    "armor": { "hull_front": 39, "hull_side": 29, "hull_rear": 29, "turret_front": 39, "turret_side": 29, "turret_rear": 29 },
+    "notes": "Rápido pero frágil."
   }
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
 ]
+
 }

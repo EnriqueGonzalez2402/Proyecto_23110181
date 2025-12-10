@@ -1,42 +1,49 @@
 import cv2
+import json
+import os
 from screen_reader import ScreenReader
 from yolo_detector import YOLODetector
-from tank_database import TankDatabase
+from enemy_detector import EnemyColorDetector
 
-# Inicialización
-reader = ScreenReader(monitor_index=1)
-detector = YOLODetector()
-db = TankDatabase()
+# --- Cargar base de datos de tanques ---
+JSON_PATH = os.path.join("data", "tanks.json")
+with open(JSON_PATH, "r", encoding="utf-8") as f:
+    tank_database = json.load(f)
 
+# --- Inicializar ---
+screen = ScreenReader(monitor_index=1)
+yolo = YOLODetector()
+enemy = EnemyColorDetector()
+
+print("Sistema iniciado...")
+
+# --- Loop principal ---
 while True:
-    frame = reader.capture()
-    detections = detector.detect_tanks(frame)
+    frame = screen.capture()
 
-    for det in detections:
-        if not det["enemy"]:
-            continue  # solo enemigos
+    # 1. detectar color rojo (enemigos)
+    enemy_box, _ = enemy.detect_enemy(frame)
 
-        tank_info = db.find_tank(det["label"])
+    # 2. si hay enemigo, usar YOLO para clasificar tanque
+    if enemy_box:
+        ex1, ey1, ex2, ey2 = enemy_box
+        crop = frame[ey1:ey2, ex1:ex2]
 
-        x1, y1, x2, y2 = map(int, det["box"].xyxy[0])
+        detections = yolo.detect_tanks(crop)
 
-        # Dibujar caja roja
-        cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
+        if len(detections) > 0:
+            best = max(detections, key=lambda x: x["confidence"])
+            tank_name = best["label"]
 
-        # Texto con nombre detectado
-        cv2.putText(frame, det["label"], (x1, y1 - 10),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 2)
+            print("Tanque detectado:", tank_name)
 
-        if tank_info:
-            text = f"{tank_info['name']} | HP: {tank_info['hp']} | Weak: {', '.join(tank_info['weakspots'])}"
-        else:
-            text = f"{det['label']} (sin datos)"
+            # Si el tanque existe en la base, imprimir datos
+            if tank_name in tank_database:
+                print("Stats:", tank_database[tank_name])
+            else:
+                print("Tanque no está en la base de datos.")
 
-        cv2.putText(frame, text, (x1, y2 + 20),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,255), 2)
-
-    cv2.imshow("Tank Assistant", frame)
-
+    cv2.imshow("WOT Detector", frame)
     if cv2.waitKey(1) == 27:
         break
 
