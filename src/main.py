@@ -1,50 +1,79 @@
 import cv2
 import json
-import os
-from screen_reader import ScreenReader
-from yolo_detector import YOLODetector
-from enemy_detector import EnemyColorDetector
-
-# --- Cargar base de datos de tanques ---
-JSON_PATH = os.path.join("data", "tanks.json")
-with open(JSON_PATH, "r", encoding="utf-8") as f:
-    tank_database = json.load(f)
-
-# --- Inicializar ---
-screen = ScreenReader(monitor_index=1)
-yolo = YOLODetector()
-enemy = EnemyColorDetector()
+from enemy import EnemyDetector
 
 print("Sistema iniciado...")
 
-# --- Loop principal ---
+# --- Cargar base de datos desde el JSON ---
+with open("data\\tanks.json", "r", encoding="utf-8") as f:
+    TANK_DATABASE = json.load(f)["tanks"]
+
+# Función para buscar tanque por nombre
+def buscar_tanque(nombre):
+    for tanque in TANK_DATABASE:
+        if tanque["name"].lower() == nombre.lower():
+            return tanque
+    return None
+
+# EJEMPLO: tanque detectado por tu modelo (manual por ahora)
+DETECTED_NAME = "MS-1"     # <-- CAMBIA ESTE NOMBRE
+DETECTED_CLASS = "light"   # <-- light, medium, heavy, tank_destroyer
+
+# Buscar la info en el JSON
+info = buscar_tanque(DETECTED_NAME)
+
+enemy = EnemyDetector()
+cap = cv2.VideoCapture("videos/wot.mp4")
+
+if not cap.isOpened():
+    print("No se pudo abrir el video")
+    exit()
+
 while True:
-    frame = screen.capture()
-
-    # 1. detectar color rojo (enemigos)
-    enemy_box, _ = enemy.detect_enemy(frame)
-
-    # 2. si hay enemigo, usar YOLO para clasificar tanque
-    if enemy_box:
-        ex1, ey1, ex2, ey2 = enemy_box
-        crop = frame[ey1:ey2, ex1:ex2]
-
-        detections = yolo.detect_tanks(crop)
-
-        if len(detections) > 0:
-            best = max(detections, key=lambda x: x["confidence"])
-            tank_name = best["label"]
-
-            print("Tanque detectado:", tank_name)
-
-            # Si el tanque existe en la base, imprimir datos
-            if tank_name in tank_database:
-                print("Stats:", tank_database[tank_name])
-            else:
-                print("Tanque no está en la base de datos.")
-
-    cv2.imshow("WOT Detector", frame)
-    if cv2.waitKey(1) == 27:
+    ret, frame = cap.read()
+    if not ret:
         break
 
+    box, mask = enemy.detect_enemy(frame)
+
+    if box is not None:
+        x1, y1, x2, y2 = box
+
+        # Dibujar recuadro
+        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,0,255), 2)
+
+        # Mostrar nombre + clase detectada
+        cv2.putText(frame,
+                    f"{DETECTED_NAME} - {DETECTED_CLASS}",
+                    (x1, y1 - 10),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.8, (255,255,255), 2)
+
+        # Si existe en el JSON, mostrar weakspots reales
+        if info:
+            weakspot = ", ".join(info["weakspots"])
+            cv2.putText(frame,
+                        f"Weakspots: {weakspot}",
+                        (x1, y2 + 25),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.7, (0,255,255), 2)
+
+            cv2.putText(frame,
+                        info["notes"],
+                        (x1, y2 + 55),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.6, (0,255,0), 2)
+        else:
+            cv2.putText(frame,
+                        "No hay datos en JSON",
+                        (x1, y2 + 25),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.7, (0,255,255), 2)
+
+    cv2.imshow("Detector", frame)
+
+    if cv2.waitKey(30) == 27:
+        break
+
+cap.release()
 cv2.destroyAllWindows()
